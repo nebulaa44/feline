@@ -1,12 +1,14 @@
 use std::env;
 use std::io;
 
+mod config;
+use config::Config;
+
 fn main() 
 {
-    let args: Vec<String> = env::args().collect();
-
-    // There will always be at least 1 argument: the binary path.
-    if args.len() == 1 { copy_stdin(); }
+    let config = Config::new();
+    
+    if config.filenames.len() == 0 { copy_stdin(); }
 }
 
 fn copy_stdin()
