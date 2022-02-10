@@ -1,5 +1,6 @@
 use std::env;
 
+#[derive(Debug)]
 pub struct Config
 {
     pub filenames: Vec<String>,
