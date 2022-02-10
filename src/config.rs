@@ -10,7 +10,7 @@ pub struct Config
 
 impl Config
 {
-    pub fn new() -> Config
+    pub fn from_env_args() -> Config
     {
         let args = env::args();
 
