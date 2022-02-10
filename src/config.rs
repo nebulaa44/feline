@@ -1,5 +1,4 @@
 use std::env;
-use std::io;
 
 #[derive(Debug)]
 pub struct Config
