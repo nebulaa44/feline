@@ -35,7 +35,7 @@ impl Config
         let mut input_buf = String::new();
         let mut line_num: u16 = 1;
 
-        let number_lines = self.switches.contains(&"-n".to_string());
+        let number_lines = self.switches.contains(&"-n".to_string()) || self.switches.contains(&"--number".to_string());
 
         loop 
         {
