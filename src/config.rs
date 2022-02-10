@@ -33,6 +33,7 @@ impl Config
     pub fn copy_stdin(&self)
     {
         let mut input_buf = String::new();
+        let mut line_num: u16 = 1;
 
         loop 
         {
@@ -40,10 +41,14 @@ impl Config
                 .read_line(&mut input_buf)
                 .expect("Could not read standard input!");
 
+            
+            if self.switches.contains(&String::from("-n")) { print!("\t{line_num}  "); }
+
             // We print! because read_line adds a newline for us.
             print!("{}", input_buf);
 
             input_buf.clear();
+            line_num += 1;
         }
     }
 }
