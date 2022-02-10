@@ -35,14 +35,15 @@ impl Config
         let mut input_buf = String::new();
         let mut line_num: u16 = 1;
 
+        let number_lines = self.switches.contains(&"-n".to_string());
+
         loop 
         {
             io::stdin()
                 .read_line(&mut input_buf)
                 .expect("Could not read standard input!");
 
-            
-            if self.switches.contains(&String::from("-n")) { print!("\t{line_num}  "); }
+            if number_lines { print!("\t{line_num}  "); }
 
             // We print! because read_line adds a newline for us.
             print!("{}", input_buf);
