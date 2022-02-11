@@ -4,8 +4,9 @@ use std::io;
 #[derive(Debug)]
 pub struct Config
 {
-    pub filenames: Vec<String>,
-    pub switches:  Vec<String>,
+    pub filenames:    Vec<String>,
+    pub switches:     Vec<String>,
+    pub number_lines: bool
 }
 
 impl Config
@@ -27,7 +28,9 @@ impl Config
             else { filenames.push(arg); }
         }
 
-        Config {filenames, switches}
+        let number_lines = filenames.contains(&"-n".to_string()) || filenames.contains(&"--number".to_string());
+
+        Config {filenames, switches, number_lines}
     }
 
     pub fn copy_stdin(&self)
@@ -35,15 +38,13 @@ impl Config
         let mut input_buf = String::new();
         let mut line_num: u16 = 1;
 
-        let number_lines = self.switches.contains(&"-n".to_string()) || self.switches.contains(&"--number".to_string());
-
         loop 
         {
             io::stdin()
                 .read_line(&mut input_buf)
                 .expect("Could not read standard input!");
 
-            if number_lines { print!("\t{line_num}  "); }
+            if self.number_lines { print!("\t{line_num}  "); }
 
             // We print! because read_line adds a newline for us.
             print!("{}", input_buf);
