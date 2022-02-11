@@ -6,7 +6,9 @@ pub struct Config
 {
     pub filenames:    Vec<String>,
     pub switches:     Vec<String>,
-    pub number_lines: bool
+
+    pub debug:        bool,
+    pub number_lines: bool,
 }
 
 impl Config
@@ -29,8 +31,9 @@ impl Config
         }
 
         let number_lines = switches.contains(&"-n".to_string()) || switches.contains(&"--number".to_string());
+        let debug = switches.contains(&"--dbg".to_string());
 
-        Config {filenames, switches, number_lines}
+        Config {filenames, switches, debug, number_lines}
     }
 
     pub fn copy_stdin(&self)
