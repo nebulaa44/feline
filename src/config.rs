@@ -1,5 +1,6 @@
 use std::env;
-use std::io;
+use std::fs;
+use std::io::{self, Read};
 
 #[derive(Debug)]
 pub struct Config
@@ -55,5 +56,26 @@ impl Config
             input_buf.clear();
             line_num += 1;
         }
+    }
+
+    pub fn copy_files(&self) -> io::Result<()>
+    {
+        for i in &self.filenames
+        {
+            if i == &"-".to_string()
+            {
+                self.copy_stdin();
+            }
+
+            let mut file = fs::File::open(i)?;
+
+            let mut file_contents = String::new();
+            file.read_to_string(&mut file_contents).expect("Could not read file!");
+
+            // TODO Add -n support
+            println!("{file_contents}");
+        }
+
+        Ok(())
     }
 }

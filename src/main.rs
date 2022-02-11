@@ -7,4 +7,5 @@ fn main()
     if config.debug { println!("Config data\n{config:#?}\n"); }
 
     if config.filenames.is_empty() { config.copy_stdin(); }
+    else { config.copy_files(); }
 }
