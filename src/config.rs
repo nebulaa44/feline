@@ -28,7 +28,7 @@ impl Config
             else { filenames.push(arg); }
         }
 
-        let number_lines = filenames.contains(&"-n".to_string()) || filenames.contains(&"--number".to_string());
+        let number_lines = switches.contains(&"-n".to_string()) || switches.contains(&"--number".to_string());
 
         Config {filenames, switches, number_lines}
     }
